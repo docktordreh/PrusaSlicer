@@ -83,7 +83,7 @@ void LabelObjects::init(const SpanOfConstPtrs<PrintObject>& objects, LabelObject
             std::string name = model_object->name;
             if (m_label_objects_style == LabelObjectsStyle::Octoprint) {
                 // use zero-based indexing for objects and instances, as we always have done
-                name += " id:" + std::to_string(object_id) + " copy " + std::to_string(instance_id); 
+                name += " id:" + std::to_string(object_id) + " copy " + std::to_string(instance_id) + "uid " + std::to_string(unique_id); 
             }
             else if (m_label_objects_style == LabelObjectsStyle::Firmware) {
                 // use one-based indexing for objects and instances so indices match what we see in PrusaSlicer.
@@ -91,7 +91,7 @@ void LabelObjects::init(const SpanOfConstPtrs<PrintObject>& objects, LabelObject
                 ++instance_id;
 
                 if (object_has_more_instances)
-                    name += " (Instance " + std::to_string(instance_id) + ")";
+                    name += " (Instance " + std::to_string(instance_id) + ")_uid " + std::to_string(unique_id)";
                 if (m_flavor == gcfKlipper) {
                     // Disallow Klipper special chars, common illegal filename chars, etc.
                     const std::string banned = "\b\t\n\v\f\r \"#%&\'*-./:;<>\\";
